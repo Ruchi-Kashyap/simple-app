@@ -1,15 +1,16 @@
-app.get("/", (req, res) => {
-  res.send(`
-    <h1>🚀 CI/CD Pipeline Demo</h1>
-    <p><b>Hello from Ruchi’s App!</b></p>
+const http = require("http");
 
-    <p>This app is deployed using:</p>
-    <ul>
-      <li>Docker 🐳</li>
-      <li>GitHub Actions ⚙️</li>
-      <li>AWS EC2 ☁️</li>
-    </ul>
+const app = (req, res) => {
+  res.write("Hello !!!!!!!!!! this is a sample app 🚀");
+  res.end();
+};
 
-    <p><b>Status:</b> Running successfully ✅</p>
-  `);
-});
+const server = http.createServer(app);
+
+if (require.main === module) {
+  server.listen(3000, () => {
+    console.log("Server running on port 3000");
+  });
+}
+
+module.exports = app;
