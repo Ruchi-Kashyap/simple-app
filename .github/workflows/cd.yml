@@ -39,7 +39,7 @@ jobs:
         with:
           host: ${{ secrets.EC2_STAGING_HOST }}
           username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
+          key: ${{ secrets.EC2_STAGING_KEY }}   # ✅ FIXED
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/simple-app:latest
             docker stop simple-app || true
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
 
     environment:
-      name: production   # 👈 THIS ENABLES APPROVAL
+      name: production   # ✅ enables approval
 
     steps:
       - name: Deploy to Production EC2
@@ -59,7 +59,7 @@ jobs:
         with:
           host: ${{ secrets.EC2_PROD_HOST }}
           username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
+          key: ${{ secrets.EC2_PROD_KEY }}   # ✅ FIXED
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/simple-app:latest
             docker stop simple-app || true
