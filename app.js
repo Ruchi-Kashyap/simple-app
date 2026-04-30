@@ -1,16 +1,15 @@
-const http = require("http");
+app.get("/", (req, res) => {
+  res.send(`
+    <h1>🚀 CI/CD Pipeline Demo</h1>
+    <p><b>Hello from Ruchi’s App!</b></p>
 
-const app = (req, res) => {
-  res.write("Hello !!!!!!🚀");
-  res.end();
-};
+    <p>This app is deployed using:</p>
+    <ul>
+      <li>Docker 🐳</li>
+      <li>GitHub Actions ⚙️</li>
+      <li>AWS EC2 ☁️</li>
+    </ul>
 
-const server = http.createServer(app);
-
-if (require.main === module) {
-  server.listen(3000, () => {
-    console.log("Server running on port 3000");
-  });
-}
-
-module.exports = app;
+    <p><b>Status:</b> Running successfully ✅</p>
+  `);
+});
