@@ -1,11 +1,22 @@
 const http = require("http");
+const client = require("prom-client");
 
-const app = (req, res) => {
-  res.write("Hello !!!!!!!!!! this is a sample app ");
-  res.end();
-};
+// collect default metrics
+client.collectDefaultMetrics();
 
-const server = http.createServer(app);
+const server = http.createServer(async (req, res) => {
+  
+  // 👉 Metrics endpoint
+  if (req.url === "/metrics") {
+    res.writeHead(200, { "Content-Type": client.register.contentType });
+    res.end(await client.register.metrics());
+    return;
+  }
+
+  // 👉 Default route
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("Hello !!!!!!!!!! this is a sample app with metrics 🚀");
+});
 
 if (require.main === module) {
   server.listen(3000, () => {
@@ -13,4 +24,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = app;
+module.exports = server;
