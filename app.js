@@ -1,7 +1,7 @@
 const http = require("http");
 
 const app = (req, res) => {
-  res.write("Hello !!!!!!!!!! this is a sample app ");
+  res.write("Hello !!!!!!!!!! this is a sample app. ");
   res.end();
 };
 
